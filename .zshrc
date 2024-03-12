@@ -157,6 +157,7 @@ alias chromium='firejail chromium'
 alias steam='flatpak run com.valvesoftware.Steam'
 alias vi='vim'
 alias localstack-start='docker run --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
+alias network-monitor='nload'
 
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
