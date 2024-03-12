@@ -1,5 +1,4 @@
 local wezterm = require 'wezterm'
-
 -- The filled in variant of the < symbol for tab
 local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 
@@ -24,7 +23,12 @@ return {
   font_size = 16.0,
   scrollback_lines = 5000,
   window_background_opacity = 0.85,
-
+  window_decorations = "RESIZE",
+  automatically_reload_config = true,
+  -- WORKAROUND gnome wayland 
+  enable_wayland = false,
+  front_end = "OpenGL", -- "WebGpu", "Software"
+  -- END WORKAROUND
     -- Added by Guillermo
   hide_tab_bar_if_only_one_tab = true,
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
