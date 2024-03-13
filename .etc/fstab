@@ -1,0 +1,30 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+# <file system> <dir> <type> <options> <dump> <pass>
+
+#Se quito discard porque no es recomendable en su lugar se usa el servicio fstrim.service
+#https://wiki.archlinux.org/title/Solid_state_drive#Periodic_TRIM
+
+# /
+/dev/mapper/archlinux-rootvol	/         	ext4      	rw,defaults,noatime,errors=remount-ro	0 1
+
+#home
+/dev/mapper/archlinux-homevol /home	ext4	rw,noatime,errors=remount-ro	0 2
+
+#boot
+/dev/sda1           	/boot 	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+tmpfs 			/tmp 		tmpfs 		defaults,noatime,nosuid,nodev,size=8G		0 0
+
+#For old SSD
+###tmpfs			/var/tmp	tmpfs		defaults,noatime,nosuid,size=32M  			0 0
+#tmpfs			/var/log	tmpfs		defaults,noatime,nosuid,mode=0755,size=32M  			0 0
+###tmpfs			/var/run	tmpfs		defaults,noatime,nosuid,mode=0755,size=32M  			0 0
+
+tmpfs			/home/ahioros/.cache	tmpfs	noatime,nodev,nosuid			0 0
+
+/dev/zram0 none swap defaults 0 0
+/dev/zram1 none swap defaults 0 0
+
+#NTFS Windows
+/dev/sda3       /mnt/ntfs  ntfs rw,nosuid,nodev,relatime,user_id=0,group_id=0,allow_other,blksize=4096,user,noauto    0 0

@@ -60,7 +60,7 @@ return {
       mods = 'LEADER',
       key = '0',
       action = wezterm.action.PaneSelect {
-        mode = 'SwapWithActive',
+        mode = 'Activate',
       },
     },
     -- activate copy mode or vim mode
