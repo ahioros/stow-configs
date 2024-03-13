@@ -18,7 +18,7 @@ cp ~/.zshrc .
 stow .
 ```
 
-# etc files as root
+# etc files as root or you can use stow -t
 ```bash
 pacman -S powertop
 cp .etc/modprobe.d/* /etc/modprobe.d/
