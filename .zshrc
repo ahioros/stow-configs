@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/ahioros/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -111,7 +111,7 @@ zle -N autosuggest-accept
 bindkey '^ ' autosuggest-accept
 
 #Enable zsh syntax highligting with dracula theme 
-source /home/ahioros/.oh-my-zsh/dracula/zsh-syntax-highlighting.sh
+source $HOME/.oh-my-zsh/dracula/zsh-syntax-highlighting.sh
 
 #Enable zsh syntax highlig
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -151,7 +151,7 @@ alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 alias less='cless'
-alias sunlock='faillock --user ahioros --reset'
+alias sunlock='faillock --user $USER --reset'
 alias firefox='firejail firefox'
 alias chromium='firejail chromium'
 alias steam='flatpak run com.valvesoftware.Steam'
@@ -177,7 +177,7 @@ bindkey -e
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 #Dracula theme for tty
-source /home/ahioros/.oh-my-zsh/dracula/dracula-tty.sh
+source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
 
 #Change the alias if we are running since a tty
 case $(tty) in /dev/tty[0-9]*)
