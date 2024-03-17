@@ -181,10 +181,13 @@ source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
 
 #Change the alias if we are running since a tty
 case $(tty) in /dev/tty[0-9]*)
-    unalias ls && alias ls='ls --color=auto' ;;
+    unalias ls && alias ls='ls --color=auto' && if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then sudo loadkeys us; else sudo loadkeys la-latin1; fi ;;
+
 esac
 
 #For docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 screenfetch 
+
+# vim: set ft=sh ts=2 sw=2 et:
