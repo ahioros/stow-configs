@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -188,6 +189,12 @@ esac
 #For docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-screenfetch 
+if [ $(mount | grep "Pandemic" | wc -l) -eq 0 ]; 
+then
+  sudo mount -o loop,offset=272629760 $HOME/Games/"[128gb]-Pandemic.Collection.RPI4-J.FI.K.E"/"J FI K E - 128gb Pandemic Collection - rpi4.img" $HOME/Games/"[128gb]-Pandemic.Collection.RPI4-J.FI.K.E"/imagen
+fi
+
+
+screenfetch
 
 # vim: set ft=sh ts=2 sw=2 et:
