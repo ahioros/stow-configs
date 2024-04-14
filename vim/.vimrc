@@ -60,7 +60,7 @@ set backupcopy=yes
 au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
 
 " add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent 
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "Enable indent-rainbow - https://github.com/adi/vim-indent-rainbow
