@@ -21,8 +21,36 @@ return {
   color_scheme = "Dracula",
   font = wezterm.font 'Hack Nerd Font',
   font_size = 16.0,
+  font_rules = {
+          {
+                  intensity = 'Bold',
+                  italic = false,
+                  font = wezterm.font {
+                          family = 'Hack Nerd Font',
+                          weight = 'Bold',
+                  },
+          },
+          {          
+                  italic = true,
+                  intensity = 'Normal',
+                  font = wezterm.font {
+                          family = 'Hack Nerd Font',
+                          weight = 'Regular',
+                          style = 'Italic',
+                          italic = true,
+                  },
+          },
+          {
+                  intensity = 'Normal',
+                  font = wezterm.font {
+                          family = 'Hack Nerd Font',
+                          weight = 'Regular',
+                          italic = false,
+                  },
+          },
+  },
   scrollback_lines = 5000,
-  window_background_opacity = 0.85,
+  window_background_opacity = 0.98,
   window_decorations = "RESIZE",
   automatically_reload_config = true,
   -- WORKAROUND gnome wayland 
