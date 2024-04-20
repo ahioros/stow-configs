@@ -59,12 +59,49 @@ set backupcopy=yes
 "Backup files with ORIGINALFILENAME-YYYYMMDD-HHMMSS.vimbackup
 au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
 
-" add yaml stuffs
+"Add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-"Enable indent-rainbow - https://github.com/adi/vim-indent-rainbow
+"Enable indent-rainbow plugin - https://github.com/adi/vim-indent-rainbow
+let g:rainbow_colors_black= [ 233, 235, 237, 238, 240, 242 ]
+let g:rainbow_colors_color= [ 226,  83, 213,  87,   7, 250 ]
+call togglerb#map('<F9>')
 call rainbow#enable()
 
+if has("autocmd")
+ augroup python
+  au!
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set tabstop=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set softtabstop=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set shiftwidth=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set expandtab
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set autoindent
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set fileformat=unix
+  autocmd WinEnter,VimEnter *.py :call rainbow#enable()
+ augroup END
+endif
 
+"Disable codeium plugin
+"let g:codeium_enabled = v:false
+
+"Disable ale plugin - https://github.com/dense-analysis/ale
+"let g:ale_enabled = v:false
+
+"Disable ale plugin specific linters
+"let g:ale_linters = {
+"\   'python': ['pylint'],
+"\}
+
+"Disable ale plugin whitespace warnings
+"let g:ale_warn_about_trailing_whitespace = 0
+
+"Change ale signs 
+if &term=~'xterm-256color'
+        let g:ale_sign_error = '✘'
+        let g:ale_sign_warning = '⚠'
+else
+        let g:ale_sign_error = '>>'
+        let g:ale_sign_warning = '--'
+endif
 ""
