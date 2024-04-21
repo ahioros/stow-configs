@@ -81,6 +81,21 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set autoindent
   autocmd WinEnter,VimEnter *.py :call rainbow#enable()
+  noremap <buffer> <F5> :exec '!python3 -m pdb' shellescape(@%, 1)<cr>
+  nnoremap <buffer> <F6> :exec '!python3' shellescape(@%, 1)<cr>
+ augroup END
+endif
+
+if has("autocmd")
+ augroup shell
+  au!
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set tabstop=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set softtabstop=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set shiftwidth=4
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set expandtab
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set autoindent
+  noremap <buffer> <F5> :exec '!bash -xv ' shellescape(@%, 1)<cr>
+  nnoremap <buffer> <F6> :exec '!bash ' shellescape(@%, 1)<cr>
  augroup END
 endif
 
