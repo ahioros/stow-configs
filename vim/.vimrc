@@ -56,6 +56,9 @@ set writebackup
 "Overwrite the original backup file
 set backupcopy=yes
 
+"Spell checker
+setlocal spell spelllang=en_us
+
 "Backup files with ORIGINALFILENAME-YYYYMMDD-HHMMSS.vimbackup
 au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
 
@@ -77,13 +80,15 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set shiftwidth=4
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set autoindent
-  autocmd BufNewFile,BufReadPre,FileReadPre        *.py set fileformat=unix
   autocmd WinEnter,VimEnter *.py :call rainbow#enable()
  augroup END
 endif
 
 "Disable codeium plugin
 "let g:codeium_enabled = v:false
+
+"Disable vim-isort plugin
+"let g:vim_isort = v:false
 
 "Disable ale plugin - https://github.com/dense-analysis/ale
 "let g:ale_enabled = v:false
@@ -104,4 +109,5 @@ else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
 endif
+
 ""

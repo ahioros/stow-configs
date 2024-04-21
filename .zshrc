@@ -149,7 +149,8 @@ alias top='htop'
 alias dmesg='sudo dmesg'
 #alias cat='ccat'
 #alias ls='ls --color=auto'
-alias cat='/bin/bat'
+#alias cat='/bin/bat' #vimcat
+alias cat="/usr/bin/vimcat"
 alias catn='/bin/cat'
 alias catnl='/bin/bat --paging=never'
 alias ll='lsd -lh --group-dirs=first'
@@ -157,7 +158,7 @@ alias la='lsd -a --group-dirs=first'
 alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
-alias less='cless'
+#alias less='cless' #vimcat
 alias sunlock='faillock --user $USER --reset'
 alias firefox='firejail firefox'
 alias chromium='firejail chromium'
@@ -165,6 +166,14 @@ alias steam='flatpak run com.valvesoftware.Steam'
 alias vi='vim'
 alias localstack-start='docker run --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
 alias network-monitor='nload'
+
+# vimcat and vimpager
+# commented alias cat='/bin/bat'
+# commented alias less='cless'
+export PAGER=/usr/bin/vimpager
+alias less=$PAGER
+alias zless=$PAGER
+
 
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
