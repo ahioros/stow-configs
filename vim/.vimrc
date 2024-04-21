@@ -99,6 +99,22 @@ if has("autocmd")
  augroup END
 endif
 
+if has("autocmd")
+ augroup terraform
+  au!
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set tabstop=2
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set softtabstop=2
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set shiftwidth=2
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set expandtab
+  autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set autoindent
+  autocmd WinEnter,VimEnter *.tf :call rainbow#enable()
+  noremap <buffer> <F5> :exec '!terraform fmt -check -diff' shellescape(@%, 1)<cr>
+  nnoremap <buffer> <F6> :exec '!terraform fmt' shellescape(@%, 1)<cr>
+  nnoremap <buffer> <F7> :exec '!terraform init' <cr>
+  nnoremap <buffer> <F8> :exec '!terraform plan' <cr>
+ augroup END
+endif
+
 "Uncomment to disable codeium plugin
 "let g:codeium_enabled = v:false
 
