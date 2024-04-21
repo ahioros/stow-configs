@@ -174,6 +174,9 @@ export PAGER=/usr/bin/vimpager
 alias less=$PAGER
 alias zless=$PAGER
 
+#Fix issue with PAGER=/usr/bin/vimpager
+export GIT_PAGER=cat git diff
+
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
@@ -214,12 +217,21 @@ export LESS_TERMCAP_se=$'\e[0m'         # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'         # reset underline
 export GROFF_NO_SGR=1                   # for konsole
 
+#automount-iso
 if [ $(mount | grep "Pandemic" | wc -l) -eq 0 ]; 
 then
   automount-iso
 fi
 
+#screenfetch
+cores=$(nproc)
+load=$(awk '{print $3}'< /proc/loadavg)
 
-screenfetch
+usage=$(echo | awk -v c="${cores}" -v l="${load}" '{print l*100/c}' | awk -F. '{print $1}')
+if [[ ${usage} -lt 60 ]]; then
+    if [ -f /usr/bin/screenfetch ]; then 
+      screenfetch  -d '-de;-wm;-wmtheme' -D 'Arch Linux' -A 'Arch Linux' ; 
+    fi
+fi
 
 # vim: set ft=sh ts=2 sw=2 et:

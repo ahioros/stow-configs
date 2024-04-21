@@ -84,21 +84,21 @@ if has("autocmd")
  augroup END
 endif
 
-"Disable codeium plugin
+"Uncomment to disable codeium plugin
 "let g:codeium_enabled = v:false
 
-"Disable vim-isort plugin
+"Uncomment to disable vim-isort plugin
 "let g:vim_isort = v:false
 
-"Disable ale plugin - https://github.com/dense-analysis/ale
+"Uncomment to disable ale plugin - https://github.com/dense-analysis/ale
 "let g:ale_enabled = v:false
 
-"Disable ale plugin specific linters
+"Uncomment to disable ale plugin specific linters
 "let g:ale_linters = {
 "\   'python': ['pylint'],
 "\}
 
-"Disable ale plugin whitespace warnings
+"Uncomment to disable ale plugin whitespace warnings
 "let g:ale_warn_about_trailing_whitespace = 0
 
 "Change ale signs 
