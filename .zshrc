@@ -174,7 +174,6 @@ export PAGER=/usr/bin/vimpager
 alias less=$PAGER
 alias zless=$PAGER
 
-
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
@@ -217,7 +216,7 @@ export GROFF_NO_SGR=1                   # for konsole
 
 if [ $(mount | grep "Pandemic" | wc -l) -eq 0 ]; 
 then
-  sudo mount -o loop,offset=272629760 $HOME/Games/"[128gb]-Pandemic.Collection.RPI4-J.FI.K.E"/"J FI K E - 128gb Pandemic Collection - rpi4.img" $HOME/Games/"[128gb]-Pandemic.Collection.RPI4-J.FI.K.E"/imagen
+  automount-iso
 fi
 
 
