@@ -198,10 +198,16 @@ export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f
 source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
 
 #Change the alias if we are running since a tty
-case $(tty) in /dev/tty[0-9]*)
-    unalias ls && alias ls='ls --color=auto' && if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then sudo loadkeys us; else sudo loadkeys la-latin1; fi ;;
+if [[ $(tty) = /dev/tty[0-9]* ]]; then
+  unalias ls
+  alias ls='ls --color=auto'
 
-esac
+  if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then
+    sudo loadkeys us
+  else
+    sudo loadkeys la-latin1
+  fi
+fi
 
 #For docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
