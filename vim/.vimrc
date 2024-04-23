@@ -131,6 +131,10 @@ let g:ale_linters = {
 \   'python': ['pylint'],
 \}
 
+"Optional arguments for pylint
+let g:ale_python_pylint_options = '--disable=missing-docstring,too-few-public-methods --max-line-length=100'
+
+
 "Optional: Configure ale to automatically fix files on save
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
