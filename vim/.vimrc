@@ -63,7 +63,7 @@ setlocal spell spelllang=en_us
 au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
 
 "Add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent 
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "Enable indent-rainbow plugin - https://github.com/adi/vim-indent-rainbow
@@ -81,21 +81,21 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set autoindent
   autocmd WinEnter,VimEnter *.py :call rainbow#enable()
-  noremap <buffer> <F5> :exec '!python3 -m pdb' shellescape(@%, 1)<cr>
-  nnoremap <buffer> <F6> :exec '!python3' shellescape(@%, 1)<cr>
+  autocmd FileType python map <buffer> <F5> :exec '!clear && python3 -m pdb' shellescape(@%, 1)<cr>
+  autocmd FileType python map <buffer> <F6> :exec '!clear && python3' shellescape(@%, 1)<cr>
  augroup END
 endif
 
 if has("autocmd")
- augroup shell
+ augroup sh
   au!
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set tabstop=4
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set softtabstop=4
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set shiftwidth=4
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set autoindent
-  noremap <buffer> <F5> :exec '!bash -xv ' shellescape(@%, 1)<cr>
-  nnoremap <buffer> <F6> :exec '!bash ' shellescape(@%, 1)<cr>
+  autocmd FileType sh map <buffer> <F5> :exec '!clear && bash -xv ' shellescape(@%, 1)<cr>
+  autocmd FileType sh map <buffer> <F6> :exec '!clear && bash ' shellescape(@%, 1)<cr>
  augroup END
 endif
 
@@ -108,10 +108,10 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.tf set autoindent
   autocmd WinEnter,VimEnter *.tf :call rainbow#enable()
-  noremap <buffer> <F5> :exec '!terraform fmt -check -diff' shellescape(@%, 1)<cr>
-  nnoremap <buffer> <F6> :exec '!terraform fmt' shellescape(@%, 1)<cr>
-  nnoremap <buffer> <F7> :exec '!terraform init' <cr>
-  nnoremap <buffer> <F8> :exec '!terraform plan' <cr>
+  autocmd FileType terraform  map <buffer> <F5> :exec '!clear && terraform fmt -check -diff' shellescape(@%, 1)<cr>
+  autocmd FileType terraform  map <buffer> <F6> :exec '!clear && terraform fmt' shellescape(@%, 1)<cr>
+  autocmd FileType terraform  map <buffer> <F7> :exec '!clear && terraform init' <cr>
+  autocmd FileType terraform  map <buffer> <F8> :exec '!clear && terraform plan' <cr>
  augroup END
 endif
 
@@ -125,17 +125,39 @@ endif
 "let g:ale_enabled = v:false
 
 "Uncomment to disable ale plugin specific linters
-"let g:ale_linters = {
-"\   'python': ['pylint'],
-"\}
+" ruff, pylint
+let g:ale_linters = {
+\   'python': ['pylint'],
+\}
+
+"Optional: Configure ale to automatically fix files on save
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black', 'isort'],
+\}
+"Optional: Configure ale to use isort with parameters
+"let g:ale_python_isort_options = '--profile black -l 100'
+
+"Optional: Configure ale to use ruff and fix on save
+"let: g:ale_python_ruff_use_global = 1
+
+"Optional: Configure ale_fixers to fix on save
+let g:ale_fix_on_save = 1
 
 "Uncomment to disable ale plugin whitespace warnings
 "let g:ale_warn_about_trailing_whitespace = 0
 
-"Change ale signs 
+"Optional: configure ale to use flake8
+"let g:ale_python_flake8_use_global = 1
+
+"Change ale signs
 if &term=~'xterm-256color'
         let g:ale_sign_error = '✘'
         let g:ale_sign_warning = '⚠'
+        "Enable powerline status bar
+        let g:powerline_pycmd="py3"
+        "Enable status bar by default
+        set laststatus=2
 else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
