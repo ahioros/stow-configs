@@ -70,7 +70,6 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:rainbow_colors_black= [ 233, 235, 237, 238, 240, 242 ]
 let g:rainbow_colors_color= [ 226,  83, 213,  87,   7, 250 ]
 call togglerb#map('<F9>')
-call rainbow#enable()
 
 if has("autocmd")
  augroup python
@@ -94,6 +93,7 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set shiftwidth=4
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.sh set autoindent
+  autocmd WinEnter,VimEnter *.sh :call rainbow#enable()
   autocmd FileType sh map <buffer> <F5> :exec '!clear && bash -xv ' shellescape(@%, 1)<cr>
   autocmd FileType sh map <buffer> <F6> :exec '!clear && bash ' shellescape(@%, 1)<cr>
  augroup END
