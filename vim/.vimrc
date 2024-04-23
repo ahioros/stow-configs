@@ -67,8 +67,8 @@ au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "Enable indent-rainbow plugin - https://github.com/adi/vim-indent-rainbow
-let g:rainbow_colors_black= [ 233, 235, 237, 238, 240, 242 ]
-let g:rainbow_colors_color= [ 226,  83, 213,  87,   7, 250 ]
+let g:rainbow_colors_color= [ 233, 235, 237, 238, 240, 242 ]
+let g:rainbow_colors_black= [ 226,  83, 213,  87,   7, 250 ]
 call togglerb#map('<F9>')
 
 if has("autocmd")
@@ -82,6 +82,7 @@ if has("autocmd")
   autocmd WinEnter,VimEnter *.py :call rainbow#enable()
   autocmd FileType python map <buffer> <F5> :exec '!clear && python3 -m pdb' shellescape(@%, 1)<cr>
   autocmd FileType python map <buffer> <F6> :exec '!clear && python3' shellescape(@%, 1)<cr>
+  autocmd FileType python map <buffer> <F7> :exec '!clear && python3 -m pytest . '<cr>
  augroup END
 endif
 
@@ -151,7 +152,7 @@ let g:ale_fix_on_save = 1
 "let g:ale_python_flake8_use_global = 1
 
 "Change ale signs
-if &term=~'xterm-256color'
+if $TERM ==# 'xterm-256color'
         let g:ale_sign_error = '✘'
         let g:ale_sign_warning = '⚠'
         "Enable powerline status bar
