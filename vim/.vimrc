@@ -38,11 +38,21 @@ set visualbell
 "Convert tabs to space
 set expandtab
 
+"Move between buffers without saving
+set hidden
+
 "Highlig current line
 set cursorline
 
 "Highling current column
 set cursorcolumn
+
+"Search down into subfolders
+"Provides tab-completion for all file-related tasks
+set path +=**
+
+"Display all matching files when we tab complete
+set wildmenu
 
 "Turn on backup option
 set backup
@@ -71,6 +81,29 @@ let g:rainbow_colors_color= [ 233, 235, 237, 238, 240, 242 ]
 let g:rainbow_colors_black= [ 226,  83, 213,  87,   7, 250 ]
 call togglerb#map('<F9>')
 
+"Enable rainbow parenthesis
+"       https://github.com/frazrepo/vim-rainbow/tree/master I renamed the code
+"       because conflict with rainbow-indent
+let g:rainbow_parenthesis_active = 1
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick', 'dracula']
+let g:rainbow_parenthesis_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+"close the up buffer youcompletme https://github.com/ycm-core/YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+
+"youcompletme fix pipenv
+let pipenv_venv_path = system('pipenv --venv')
+if shell_error == 0
+        let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+        let g:ycm_python_binary_path = venv_path . '/bin/python'
+else
+                let g:ycm_python_binary_path = 'python'
+endif
+
+"Enable youcompletme server log level
+"let g:ycm_server_log_level = 'debug'
+
+"custom for each format
 if has("autocmd")
  augroup python
   au!
@@ -80,9 +113,11 @@ if has("autocmd")
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set expandtab
   autocmd BufNewFile,BufReadPre,FileReadPre        *.py set autoindent
   autocmd WinEnter,VimEnter *.py :call rainbow#enable()
-  autocmd FileType python map <buffer> <F5> :exec '!clear && python3 -m pdb' shellescape(@%, 1)<cr>
+  autocmd FileType python map <buffer> <F5> :exec '!clear && python3 -m ipdb' shellescape(@%, 1)<cr>
   autocmd FileType python map <buffer> <F6> :exec '!clear && python3' shellescape(@%, 1)<cr>
   autocmd FileType python map <buffer> <F7> :exec '!clear && python3 -m pytest . '<cr>
+  autocmd FileType python map <buffer> <F8> :exec '!clear && tox -e unit '<cr>
+  autocmd FileType python map <buffer> <F4> :exec '!clear && pudb' shellescape(@%, 1)<cr>
  augroup END
 endif
 
@@ -111,13 +146,13 @@ if has("autocmd")
   autocmd WinEnter,VimEnter *.tf :call rainbow#enable()
   autocmd FileType terraform  map <buffer> <F5> :exec '!clear && terraform fmt -check -diff' shellescape(@%, 1)<cr>
   autocmd FileType terraform  map <buffer> <F6> :exec '!clear && terraform fmt' shellescape(@%, 1)<cr>
-  autocmd FileType terraform  map <buffer> <F7> :exec '!clear && terraform init' <cr>
+  autocmd FileType terraform  map <buffer> <F7> :exec '!clear && terraform init && terraform validate' <cr>
   autocmd FileType terraform  map <buffer> <F8> :exec '!clear && terraform plan' <cr>
  augroup END
 endif
 
 "Uncomment to disable codeium plugin
-"let g:codeium_enabled = v:false
+let g:codeium_enabled = v:false
 
 "Uncomment to disable vim-isort plugin
 "let g:vim_isort = v:false
@@ -128,12 +163,13 @@ endif
 "Uncomment to disable ale plugin specific linters
 " ruff, pylint
 let g:ale_linters = {
-\   'python': ['pylint'],
+\   'python': ['mypy', 'pylint', 'flake8'],
 \}
+"Optional: Configure ale to use flake8 with parameters
+let g:ale_python_flake8_options = '--max-line-length 100'
 
 "Optional arguments for pylint
 let g:ale_python_pylint_options = '--disable=missing-docstring,too-few-public-methods --max-line-length=100'
-
 
 "Optional: Configure ale to automatically fix files on save
 let g:ale_fixers = {
@@ -141,7 +177,10 @@ let g:ale_fixers = {
 \   'python': ['black', 'isort'],
 \}
 "Optional: Configure ale to use isort with parameters
-"let g:ale_python_isort_options = '--profile black -l 100'
+let g:ale_python_isort_options = '--profile black -l 100'
+
+"Optional: Configure ale to use black with parameters
+let g:ale_python_black_options = '--line-length 100'
 
 "Optional: Configure ale to use ruff and fix on save
 "let: g:ale_python_ruff_use_global = 1
@@ -167,5 +206,4 @@ else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
 endif
-
 ""

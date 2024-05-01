@@ -30,7 +30,7 @@ return {
                           weight = 'Bold',
                   },
           },
-          {          
+          {
                   italic = true,
                   intensity = 'Normal',
                   font = wezterm.font {
@@ -51,11 +51,11 @@ return {
   },
   scrollback_lines = 5000,
   window_background_opacity = 0.98,
-  window_decorations = "RESIZE",
+  window_decorations = "TITLE|RESIZE", -- "RESIZE"
   automatically_reload_config = true,
-  -- WORKAROUND gnome wayland 
-  enable_wayland = false,
-  front_end = "OpenGL", -- "WebGpu", "Software"
+  -- WORKAROUND gnome wayland
+  enable_wayland = true, -- false
+  front_end = "OpenGL", -- "OpenGL", -- "WebGpu", "Software"
   -- END WORKAROUND
     -- Added by Guillermo
   hide_tab_bar_if_only_one_tab = true,
@@ -109,7 +109,7 @@ return {
 
   --  Note: View if text background opacity works fine, by default 1.0
   text_background_opacity = 0.85,
-  
+
   -- Enable the scrollbar.
   -- It will occupy the right window padding space.
   -- If right padding is set to 0 then it will be increased
@@ -127,7 +127,7 @@ return {
                   username = 'pi',
           },
   },
-  
+
   wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local edge_background = '#0b0022'
     local background = '#1b1032'

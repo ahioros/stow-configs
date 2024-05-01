@@ -14,7 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 if [ "$TERM" = "xterm-256color" ]; then
   ZSH_THEME="dracula"
 else
-  ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"  
+  ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
 fi
 
 
@@ -117,13 +117,13 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 zle -N autosuggest-accept
 bindkey '^ ' autosuggest-accept
 
-#Enable zsh syntax highligting with dracula theme 
+#Enable zsh syntax highligting with dracula theme
 source $HOME/.oh-my-zsh/dracula/zsh-syntax-highlighting.sh
 
 #Enable zsh syntax highlig
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#Highlight brackets patter curosr main 
+#Highlight brackets patter curosr main
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 alias powersave='sudo cpupower -c all frequency-set -g powersave'
@@ -191,7 +191,7 @@ setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
 bindkey -e
 
-#Dracula theme for FZF 
+#Dracula theme for FZF
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 #Dracula theme for tty
@@ -224,10 +224,10 @@ export LESS_TERMCAP_ue=$'\e[0m'         # reset underline
 export GROFF_NO_SGR=1                   # for konsole
 
 #automount-iso
-if [ $(mount | grep "Pandemic" | wc -l) -eq 0 ]; 
-then
-  automount-iso
-fi
+#if [ $(mount | grep "Pandemic" | wc -l) -eq 0 ];
+#then
+#  automount-iso
+#fi
 
 #screenfetch
 cores=$(nproc)
@@ -235,8 +235,8 @@ load=$(awk '{print $3}'< /proc/loadavg)
 
 usage=$(echo | awk -v c="${cores}" -v l="${load}" '{print l*100/c}' | awk -F. '{print $1}')
 if [[ ${usage} -lt 60 ]]; then
-    if [ -f /usr/bin/screenfetch ]; then 
-      screenfetch  -d '-de;-wm;-wmtheme' -D 'Arch Linux' -A 'Arch Linux' ; 
+    if [ -f /usr/bin/screenfetch ]; then
+      screenfetch  -d '-de;-wm;-wmtheme' -D 'Arch Linux' -A 'Arch Linux' ;
     fi
 fi
 
