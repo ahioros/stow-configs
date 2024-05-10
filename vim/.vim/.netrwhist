@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/ahioros/.vim/pack/jvirtanen/start/vim-hcl/ftdetect'
+let g:netrw_dirhist_6='/home/ahioros/.vim/pack/jvirtanen/start/vim-hcl/syntax'
+let g:netrw_dirhist_5='/home/ahioros/.vim/pack/jvirtanen/start/vim-hcl'
+let g:netrw_dirhist_4='/home/ahioros/Code/LeetCode/.venv'
+let g:netrw_dirhist_3='/home/ahioros/Code/LeetCode'
+let g:netrw_dirhist_2='/home/ahioros/.vim/pack'
+let g:netrw_dirhist_1='/home/ahioros/.vim'
+let g:netrw_dirhist_0='/home/ahioros/stow-configs/.config/wezterm'
+let g:netrw_dirhist_9='/home/ahioros/.config/wezterm'
+let g:netrw_dirhist_8='/home/ahioros/tmp/kk/npm-test/src'

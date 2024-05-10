@@ -47,6 +47,9 @@ set cursorline
 "Highling current column
 set cursorcolumn
 
+"Set relative line numbers
+set relativenumber
+
 "Search down into subfolders
 "Provides tab-completion for all file-related tasks
 set path +=**
@@ -152,7 +155,7 @@ if has("autocmd")
 endif
 
 "Uncomment to disable codeium plugin
-let g:codeium_enabled = v:false
+"let g:codeium_enabled = v:false
 
 "Uncomment to disable vim-isort plugin
 "let g:vim_isort = v:false
