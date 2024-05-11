@@ -79,6 +79,10 @@ au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml "foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+"Add Yggdroot/indentLine plugin use theme color
+"https://github.com/Yggdroot/indentLine
+let g:indentLine_setColors = 0
+
 "Enable indent-rainbow plugin - https://github.com/adi/vim-indent-rainbow
 let g:rainbow_colors_color= [ 233, 235, 237, 238, 240, 242 ]
 let g:rainbow_colors_black= [ 226,  83, 213,  87,   7, 250 ]
