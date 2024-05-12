@@ -90,3 +90,9 @@ else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
 endif
+
+"Plugin wfxr/minimap.vim
+"code-minimap installed with cargo
+let g:minimap_width = 5
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
