@@ -8,6 +8,7 @@ call plug#begin()
   Plug 'rkitover/vimpager'
   Plug 'jiangmiao/auto-pairs'
   Plug 'dracula/vim', { 'as': 'dracula' }
+  "deps installed pacman -S rust for minimap plugin
   Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
   "powerline installed with pacman
   "vim-ansible with pacman
