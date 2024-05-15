@@ -34,7 +34,7 @@ else
 endif
 
 "Enable youcompletme server log level
-let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_log_level = 'debug'
 
 "Plugin codeium
 "Uncomment to disable codeium plugin
