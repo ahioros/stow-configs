@@ -1,10 +1,7 @@
-"Plugin Yggdroot/indentLine
+"Plugin Yggdroot/indentLineset encoding=utf-8
 "Add Yggdroot/indentLine plugin use theme color
 "https://github.com/Yggdroot/indentLine
 let g:indentLine_setColors = 0
-
-"Each indent level has a distinct character
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 "Plugin indent-rainbow
 "Enable indent-rainbow plugin - https://github.com/adi/vim-indent-rainbow
@@ -45,10 +42,16 @@ endif
 "let g:ale_enabled = v:false
 
 "Uncomment to disable ale plugin specific linters
-"Optional linters: ruff, pylint
 let g:ale_linters = {
-\   'python': ['mypy', 'pylint', 'flake8'],
+\   'python': ['mypy', 'pylint', 'flake8', 'ruff'],
+\   'yaml':   ['yamllint'],
+\   'tf':     ['tflint', 'tfsec'],
+\   'vim':    ['vint'],
+\   'sh':     ['bashate', 'shellcheck'],
+\   'md':     ['markdownlint'],
+\   'xml':    ['xmllint'],
 \}
+
 "Optional: Configure ale to use flake8 with parameters
 let g:ale_python_flake8_options = '--max-line-length 100'
 
@@ -78,21 +81,32 @@ let g:ale_fix_on_save = 1
 "Optional: configure ale to use flake8
 "let g:ale_python_flake8_use_global = 1
 
-"Change ale signs
+"Change configs for different terminals
 if $TERM ==# 'xterm-256color'
         let g:ale_sign_error = '✘'
         let g:ale_sign_warning = '⚠'
+
         "Enable powerline status bar
         let g:powerline_pycmd="py3"
+
         "Enable status bar by default
         set laststatus=2
+
+        "Each indent level has a distinct character
+        let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+        "Plugin wfxr/minimap.vim
+        "code-minimap installed with cargo
+        let g:minimap_width = 5
+        let g:minimap_auto_start = 1
+        let g:minimap_auto_start_win_enter = 1
 else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
-endif
 
-"Plugin wfxr/minimap.vim
-"code-minimap installed with cargo
-let g:minimap_width = 5
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
+        "Each indent level has a distinct character
+        let g:indentLine_char_list = ['|', '¦']
+
+        "Disable powerline status bar
+        let g:powerline_loaded = 1
+endif
