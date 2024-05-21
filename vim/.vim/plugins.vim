@@ -10,7 +10,9 @@ call plug#begin()
   Plug 'dracula/vim', { 'as': 'dracula' }
   "deps installed pacman -S rust for minimap plugin
   Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   "powerline installed with pacman
-  "vim-ansible with pacman
+  "vim-ansible installed with pacman
   "rainbow_parenthesis installed manual (renamed)
 call plug#end()

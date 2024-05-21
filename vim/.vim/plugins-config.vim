@@ -83,14 +83,58 @@ let g:ale_fix_on_save = 1
 
 "Change configs for different terminals
 if $TERM ==# 'xterm-256color'
+
         let g:ale_sign_error = '✘'
         let g:ale_sign_warning = '⚠'
 
         "Enable powerline status bar
-        let g:powerline_pycmd="py3"
+        "let g:powerline_pycmd="py3"
 
-        "Enable status bar by default
-        set laststatus=2
+        "Enable powerline status bar by default
+        "set laststatus=2
+        "Disable powerline status bar
+        let g:powerline_loaded = 1
+
+        "Enable vim-airline powerline fonts
+        let g:airline_powerline_fonts = 1
+
+        "Enable vim-airline display all buffers when only one tab is open
+        let g:airline#extensions#tabline#enabled = 1
+
+        "Enable vim-airline path formatter
+        let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+        "Set vim-airline theme
+        let g:airline_theme = 'dracula'
+
+        "Enable vim-airline symbols
+        if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+        endif
+
+        " unicode symbols
+        let g:airline_left_sep = '»'
+        let g:airline_left_sep = '▶'
+        let g:airline_right_sep = '«'
+        let g:airline_right_sep = '◀'
+        let g:airline_symbols.linenr = '␊'
+        let g:airline_symbols.linenr = '␤'
+        let g:airline_symbols.linenr = '¶'
+        let g:airline_symbols.branch = '⎇'
+        let g:airline_symbols.paste = 'ρ'
+        let g:airline_symbols.paste = 'Þ'
+        let g:airline_symbols.paste = '∥'
+        let g:airline_symbols.whitespace = 'Ξ'
+
+        " airline symbols
+        let g:airline_left_sep = ''
+        let g:airline_left_alt_sep = ''
+        let g:airline_right_sep = ''
+        let g:airline_right_alt_sep = ''
+        let g:airline_symbols.branch = ''
+        let g:airline_symbols.readonly = ''
+        let g:airline_symbols.linenr = ''
+        let g:airline_symbols.crypt = '🔒'
 
         "Each indent level has a distinct character
         let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -109,4 +153,7 @@ else
 
         "Disable powerline status bar
         let g:powerline_loaded = 1
+
+        "Disable vim-airline display all buffers when only one tab is open
+        let g:airline#extensions#tabline#enabled = 0
 endif
