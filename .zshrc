@@ -13,10 +13,11 @@ export ZSH="$HOME/.oh-my-zsh"
 
 if [ "$TERM" = "xterm-256color" ]; then
   ZSH_THEME="dracula"
+#  DRACULA_DISPLAY_TIME=1
+#  DRACULA_DISPLAY_FULL_CWD=1
 else
   ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
 fi
-
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -47,7 +48,14 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
+
+#echo -n -e "\033]0;$USER  \007"
+
+case $TERM in xterm*)
+    precmd () {print -Pn "\e]0;$USER   %~\a"}
+    ;;
+esac
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
