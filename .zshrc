@@ -87,7 +87,7 @@ esac
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fzf archlinux docker-compose terraform sudo themes copydir copyfile copybuffer jsontools alias-finder history emoji web-search vagrant vagrant-prompt colored-man-pages colorize zsh-interactive-cd zsh-autosuggestions)
+plugins=(git docker fzf archlinux kubie kubectl docker-compose terraform sudo themes copydir copyfile copybuffer jsontools alias-finder history emoji web-search vagrant vagrant-prompt colored-man-pages colorize zsh-interactive-cd zsh-autosuggestions)
 
 # User configuration
 
@@ -140,7 +140,7 @@ alias conservative='sudo cpupower -c all frequency-set -g conservative'
 alias userspace='sudo cpupower -c all frequency-set -g userspace'
 alias listavailablegovernors='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors'
 alias listcurrentgovernors='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
-alias updatearch='yay -Syu '
+alias updatearch='yay -Syu --removemake'
 alias ys='yay -S'
 alias yqs='yay -Qs '
 alias yqi='yay -Qi '
