@@ -93,9 +93,40 @@ return {
     },
     -- activate copy mode or vim mode
     {
-      key = 'Enter',
+      key = '[',
       mods = 'LEADER',
       action = wezterm.action.ActivateCopyMode
+    },
+    --
+    {
+        key="RightArrow",
+        mods='LEADER',
+        action=wezterm.action{ActivatePaneDirection="Next"}
+    },
+    {
+        key="LeftArrow",
+        mods='LEADER',
+        action=wezterm.action{ActivatePaneDirection="Prev"}
+    },
+    {
+        mods='LEADER|ALT',
+        key="RightArrow",
+        action=wezterm.action{AdjustPaneSize={"Right", 5}}
+    },
+    {
+        mods='LEADER|ALT',
+        key="LeftArrow",
+        action=wezterm.action{AdjustPaneSize={"Left", 5}}
+    },
+    {
+        mods='LEADER|ALT',
+        key="UpArrow",
+        action=wezterm.action{AdjustPaneSize={"Up", 5}}
+    },
+    {
+        mods='LEADER|ALT',
+        key="DownArrow",
+        action=wezterm.action{AdjustPaneSize={"Down", 5}}
     }
   },
 
