@@ -70,7 +70,7 @@ set backupcopy=yes
 setlocal spell spelllang=en_us
 
 "set mouse to enable
-set mouse=a
+"set mouse=a
 
 "Backup files with ORIGINALFILENAME-YYYYMMDD-HHMMSS.vimbackup
 au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'

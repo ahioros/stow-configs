@@ -12,11 +12,45 @@ export ZSH="$HOME/.oh-my-zsh"
 #ZSH_THEME="duellj"
 
 if [ "$TERM" = "xterm-256color" ]; then
+
   ZSH_THEME="dracula"
+
+  # Enable fzf-tab plugin (install fzf-tab plugin)
+  source $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+  # Enable fzf-tab-source plugin (install fzf-tab-source plugin)
+  source $HOME/.oh-my-zsh/custom/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
+
+  # enable fzf menu for completion
+  # Replace zsh's default completion selection menu with fzf
+  zstyle ':completion:*' menu no
+
+  # enable fzf-tab preview (install fzf-tab plugin)
+  enable-fzf-tab
+  zstyle ":fzf-tab:complete:cd:*" fzf-preview '/usr/bin/lsd --group-dirs=first $realpath'
+
+  # disable sort when completing `git checkout`
+  zstyle ':completion:*:git-checkout:*' sort false
+
+  # NOTE: don't use escape sequences here, fzf-tab will ignore them
+  zstyle ':completion:*:descriptions' format '[%d]'
+
+  # fzf colors
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+  # Dracula theme for FZF
+  export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --prompt="> " --marker="> "  --pointer="󰋇" --info="right" '
+
 #  DRACULA_DISPLAY_TIME=1
 #  DRACULA_DISPLAY_FULL_CWD=1
+
 else
+
   ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
+
+  #Default command to use when inputs tty
+  export FZF_DEFAULT_COMMAND='fd --type f'
+
 fi
 
 # Set list of themes to pick from when loading at random
@@ -166,13 +200,15 @@ alias la='lsd -a --group-dirs=first'
 alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
+alias sl='ls'
+alias tree="lsd --tree"
 #alias less='cless' #vimcat
 alias sunlock='faillock --user $USER --reset'
 alias firefox='firejail firefox'
 alias chromium='firejail chromium'
 alias steam='flatpak run com.valvesoftware.Steam'
 alias vi='vim'
-alias localstack-start='docker run --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
+alias localstack-start='docker run -d --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
 alias network-monitor='nload'
 
 # vimcat and vimpager
@@ -193,14 +229,19 @@ source $ZSH/oh-my-zsh.sh
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=5000
+SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify
+setopt sharehistory hist_ignore_space hist_save_no_dups hist_ignore_dups hist_find_no_dups
 unsetopt beep
-bindkey -e
 
-#Dracula theme for FZF
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+# key bindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# enable grc (install grc package) color ouput for some commands
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
 #Dracula theme for tty
 source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
@@ -248,4 +289,6 @@ if [[ ${usage} -lt 60 ]]; then
     fi
 fi
 
+#fortune cookie with cowsay
+fortune | cowsay
 # vim: set ft=sh ts=2 sw=2 et:
