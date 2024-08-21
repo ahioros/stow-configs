@@ -11,8 +11,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="duellj"
 
-if [ "$TERM" = "xterm-256color" ]; then
+if [ "$TERM" = "xterm-256color" ] || [ -n "$TMUX" ]; then
 
+  # Enable dracula theme
   ZSH_THEME="dracula"
 
   # Enable fzf-tab plugin (install fzf-tab plugin)
