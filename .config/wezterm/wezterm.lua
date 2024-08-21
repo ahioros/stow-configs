@@ -55,7 +55,7 @@ return {
   automatically_reload_config = true,
   -- WORKAROUND gnome wayland
   enable_wayland = true, -- false
---  front_end = "WebGpu", -- "OpenGL", -- "WebGpu", "Software"
+--  front_end = "OpenGL", -- "OpenGL", -- "WebGpu", "Software"
   -- END WORKAROUND
     -- Added by Guillermo
   hide_tab_bar_if_only_one_tab = true,
