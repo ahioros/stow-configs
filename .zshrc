@@ -290,6 +290,12 @@ if [[ ${usage} -lt 60 ]]; then
     fi
 fi
 
+# add starship
+if [ "$TERM" = "xterm-256color" ] || [ -n "$TMUX" ]; then
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+  eval "$(starship init zsh)"
+fi
+
 #fortune cookie with cowsay
 fortune | cowsay
 # vim: set ft=sh ts=2 sw=2 et:

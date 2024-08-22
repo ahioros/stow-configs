@@ -1,0 +1,157 @@
+format = """
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$aws\
+$azure\
+$gcloud\
+$docker_context\
+$helm\
+$kubernetes\
+$memory_usage\
+$sudo\
+$terraform\
+$cmd_duration\
+$jobs\
+$battery\
+$time
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+# Add a new line before the prompt
+# $line_break\
+
+# Add new line after prompt
+add_newline = false
+
+# Use the color palette
+palette = "dracula"
+
+# Define Dracula color palette
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"
+
+[fill]
+symbol = "-"
+style = "bold #44475a"
+
+[python]
+style = 'teal'
+symbol = "🐍 "
+format = '[${symbol}${pyenv_prefix}("${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ""
+
+[aws]
+symbol = "  "
+style = "bold orange"
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[azure]
+symbol = "󰠅 "
+style = "bold blue"
+format = '[$symbol($subscription )]($style)'
+
+[gcloud]
+symbol = '☁️ '
+style = 'bold purple'
+format = 'on [$symbol$account(@$domain)(\($region\))]($style) '
+
+[lua]
+symbol = ' '
+
+[nodejs]
+style = 'blue'
+symbol = ' '
+
+[golang]
+style = 'blue'
+symbol = ' '
+
+[haskell]
+style = 'blue'
+symbol = ' '
+
+[rust]
+style = 'orange'
+symbol = ' '
+
+[ruby]
+style = 'blue'
+symbol = ' '
+
+[package]
+symbol = '󰏗 '
+
+[docker_context]
+symbol = ' '
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
+
+[character]
+error_symbol = "[󰣇](bold #ff5555)"
+success_symbol = "[󰣇](bold #f8f8f2)"
+
+[cmd_duration]
+style = "bold #f1fa8c"
+min_time = 500
+format = '[$duration]($style)'
+
+[jobs]
+symbol = ' '
+style = 'red'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[directory]
+style = "bold #50fa7b"
+format = "[$path ]($style)"
+truncation_length = 3
+truncation_symbol = "'…/"
+truncate_to_repo = false
+
+[directory.substitutions]
+'Documents' = ' '
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+'Videos' = ' '
+'Desktop' = '  '
+'Templates' = ' '
+'Games' ='󱎓 '
+'Virtual Machines' = '󰒋 '
+
+[git_branch]
+symbol = " "
+style = "bold #ff79c6"
+
+[git_status]
+style = "bold #ff5555"
+
+[hostname]
+style = "bold purple"
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold #bd93f9"
