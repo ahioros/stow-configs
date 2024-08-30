@@ -22,11 +22,11 @@ $helm\
 ${custom.dockerfiles}\
 $docker_context\
 ${custom.kubernetes}\
+${custom.kubernetes_yml}\
 ${custom.shellfiles}\
 ${custom.ansible}\
 ${custom.giturl}\
 ${custom.live-clock-icon}\
-$kubernetes\
 $memory_usage\
 $sudo\
 $terraform\
@@ -162,7 +162,7 @@ format = '[$symbol]($style)'
 read_only = " "
 style = "bold #50fa7b"
 format = "[$path ]($style)"
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "'…/"
 truncate_to_repo = false
 
@@ -280,16 +280,6 @@ disabled = false
 format = 'via [⎈ $version](bold white) '
 disabled = false
 
-#[kubernetes]
-#disabled = false
-#symbol = "⎈ "
-#detect_folders = ["k8s"]
-#detect_files = ["k8s"]
-#files = ["00-namespace.yaml"]
-#detect_extensions = ["yaml", "yml"]
-#format = " [$symbol$context]($style) "
-#style = "bright-blue"
-
 [custom.dockerfiles]
 description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.yml files"
 symbol = " "
@@ -299,10 +289,20 @@ style = "bold blue"
 
 [custom.kubernetes]
 description = "Shows the kubernetes symbol if the current directory has a k8s files"
-symbol = "󱃾 "
 detect_folders = ["k8s", "manifests"]
-files = ["00-namespace.yaml", "00-namespace.yml", "00-namespace.json" ]
-format = " via [$symbol]($style)"
+command = "kubernetes-files"
+when =""" ls *.yaml """
+shell = ["bash", "--noprofile", "--norc"]
+format = " via [$output]($style) "
+style = "bold blue"
+
+[custom.kubernetes_yml]
+description = "Shows the kubernetes symbol if the current directory has a k8s files"
+detect_folders = ["k8s", "manifests"]
+command = "kubernetes-files"
+when =""" ls *.yml """
+shell = ["bash", "--noprofile", "--norc"]
+format = " via [$output]($style) "
 style = "bold blue"
 
 [custom.shellfiles]
