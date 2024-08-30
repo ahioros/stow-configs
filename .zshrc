@@ -11,7 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="duellj"
 
-if [ "$TERM" = "xterm-256color" ] || [ -n "$TMUX" ]; then
+if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "screen-256color" ] || [ -n "$TMUX" ]; then
 
   # Enable dracula theme
   ZSH_THEME="dracula"
@@ -122,7 +122,7 @@ esac
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker fzf archlinux kubie kubectl docker-compose terraform sudo themes copydir copyfile copybuffer jsontools alias-finder history emoji web-search vagrant vagrant-prompt colored-man-pages colorize zsh-interactive-cd zsh-autosuggestions)
+plugins=(tmux git docker fzf archlinux kubie kubectl helm docker-compose terraform sudo themes copydir copyfile copybuffer jsontools alias-finder history emoji web-search vagrant vagrant-prompt colored-man-pages colorize zsh-interactive-cd zsh-autosuggestions)
 
 # User configuration
 
@@ -149,6 +149,9 @@ plugins=(git docker fzf archlinux kubie kubectl docker-compose terraform sudo th
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+#Enable tmux plugin
+ZSH_TMUX_AUTOSTART=true
 
 #Enable colorized plugins and alias ccat, cless
 ZSH_COLORIZE_STYLE="colorful"
