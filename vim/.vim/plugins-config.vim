@@ -82,7 +82,7 @@ let g:ale_fix_on_save = 1
 "let g:ale_python_flake8_use_global = 1
 
 "Change configs for different terminals
-if $TERM ==# 'xterm-256color'
+if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color'
 
         let g:ale_sign_error = '✘'
         let g:ale_sign_warning = '⚠'
@@ -144,6 +144,10 @@ if $TERM ==# 'xterm-256color'
         let g:minimap_width = 5
         let g:minimap_auto_start = 1
         let g:minimap_auto_start_win_enter = 1
+
+        "Enalbe ryanoasis/vim-devicons
+        let g:webdevicons_enable = 1
+
 else
         let g:ale_sign_error = '>>'
         let g:ale_sign_warning = '--'
@@ -156,4 +160,7 @@ else
 
         "Disable vim-airline display all buffers when only one tab is open
         let g:airline#extensions#tabline#enabled = 0
+
+        " Disable ryanoasis/vim-devicons
+        let g:webdevicons_enable = 0
 endif

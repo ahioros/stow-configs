@@ -10,6 +10,9 @@
 " properly set to work with the Vim-related packages.
 runtime! archlinux.vim
 
+" set encoding
+set encoding=utf-8
+
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
 " Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
 " and configure vim to your own liking!
@@ -53,6 +56,12 @@ set path +=**
 
 "Display all matching files when we tab complete
 set wildmenu
+
+"Display all matching files when we tab complete
+set wildmode=longest,list,full
+
+"Use system clipboard if 'unnamedplus' doesn´t work, try 'unnamed'
+set clipboard+=unnamedplus
 
 "Turn on backup option
 set backup
