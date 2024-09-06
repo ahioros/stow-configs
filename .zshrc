@@ -11,7 +11,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="duellj"
 
-if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "screen-256color" ] || [ -n "$TMUX" ]; then
+if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]]; then
+
+  #Enable tmux plugin
+  ZSH_TMUX_AUTOSTART=true
 
   # Enable dracula theme
   ZSH_THEME="dracula"
@@ -40,10 +43,7 @@ if [ "$TERM" = "xterm-256color" ] || [ "$TERM" = "screen-256color" ] || [ -n "$T
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
   # Dracula theme for FZF
-  export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --prompt="> " --marker="> "  --pointer="󰋇" --info="right" '
-
-#  DRACULA_DISPLAY_TIME=1
-#  DRACULA_DISPLAY_FULL_CWD=1
+  export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --preview-label="[ Preview ]" --prompt="▶ " --marker="♡ "  --pointer="󰋇" --info="right" '
 
 else
 
@@ -150,9 +150,6 @@ plugins=(tmux git docker fzf archlinux kubie kubectl helm docker-compose terrafo
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#Enable tmux plugin
-ZSH_TMUX_AUTOSTART=true
-
 #Enable colorized plugins and alias ccat, cless
 ZSH_COLORIZE_STYLE="colorful"
 
@@ -163,13 +160,13 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 zle -N autosuggest-accept
 bindkey '^ ' autosuggest-accept
 
-#Enable zsh syntax highligting with dracula theme
+#Enable zsh syntax highlighting with dracula theme
 source $HOME/.oh-my-zsh/dracula/zsh-syntax-highlighting.sh
 
-#Enable zsh syntax highlig
+#Enable zsh syntax highlight
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#Highlight brackets patter curosr main
+#Highlight brackets pattern cursor main
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 alias powersave='sudo cpupower -c all frequency-set -g powersave'
@@ -191,12 +188,12 @@ alias poweroffhd='udisksctl power-off -b /dev/'
 alias ysc='sudo yay -Sc'
 alias yscc='sudo yay -Scc'
 alias cp='rsync -aPWh --info=progress2'
-alias top='htop'
+#alias top='htop'
+alias top='btop'
 alias dmesg='sudo dmesg'
 #alias cat='ccat'
 #alias ls='ls --color=auto'
-#alias cat='/bin/bat' #vimcat
-alias cat="/usr/bin/vimcat"
+alias cat='/bin/bat --paging=never --theme=Dracula'
 alias catn='/bin/cat'
 alias catnl='/bin/bat --paging=never'
 alias ll='lsd -lh --group-dirs=first'
@@ -206,24 +203,17 @@ alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 alias sl='ls'
 alias tree="lsd --tree"
-#alias less='cless' #vimcat
 alias sunlock='faillock --user $USER --reset'
 alias firefox='firejail firefox'
 alias chromium='firejail chromium'
 alias steam='flatpak run com.valvesoftware.Steam'
 alias vi='vim'
 alias localstack-start='docker run -d --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
-alias network-monitor='nload'
+alias ntop='nload'
 
-# vimcat and vimpager
-# commented alias cat='/bin/bat'
-# commented alias less='cless'
-export PAGER=/usr/bin/vimpager
+export PAGER="bat --theme=Dracula"
 alias less=$PAGER
 alias zless=$PAGER
-
-#Fix issue with PAGER=/usr/bin/vimpager
-export GIT_PAGER=cat git diff
 
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
@@ -251,9 +241,12 @@ bindkey '^n' history-search-forward
 source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
 
 #Change the alias if we are running since a tty
-if [[ $(tty) = /dev/tty[0-9]* ]]; then
+if [[ $(tty) = /dev/tty[0-9]* ]] || [[ $TERM == "screen" ]]  ; then
   unalias ls
   alias ls='ls --color=auto'
+
+  # Disable autostart
+  ZSH_TMUX_AUTOSTART=false
 
   if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then
     sudo loadkeys us
@@ -293,8 +286,8 @@ if [[ ${usage} -lt 60 ]]; then
     fi
 fi
 
-# add starship
-if [ "$TERM" = "xterm-256color" ] || [ -n "$TMUX" ]; then
+# starship
+if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]] &&  [[ -n "$TMUX" ]]; then
   export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
   eval "$(starship init zsh)"
 fi
