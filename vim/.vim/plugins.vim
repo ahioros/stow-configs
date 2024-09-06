@@ -15,6 +15,7 @@ call plug#begin()
   "powerline installed with pacman
   "vim-ansible installed with pacman
   "rainbow_parenthesis installed manual (renamed)
- Plug 'lilydjwg/colorizer'
- Plug 'ryanoasis/vim-devicons'
+  Plug 'lilydjwg/colorizer'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'preservim/nerdtree'
 call plug#end()

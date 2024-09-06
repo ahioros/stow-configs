@@ -145,8 +145,18 @@ if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color'
         let g:minimap_auto_start = 1
         let g:minimap_auto_start_win_enter = 1
 
-        "Enalbe ryanoasis/vim-devicons
+        "Enable ryanoasis/vim-devicons
         let g:webdevicons_enable = 1
+
+        "Autostart Nerdtree
+        autocmd vimenter * NERDTree
+
+        nnoremap <leader>n :NERDTreeFocus<CR>
+        nnoremap <C-n> :NERDTree<CR>
+        nnoremap <C-t> :NERDTreeToggle<CR>
+        nnoremap <C-f> :NERDTreeFind<CR>
+        " start NerdTree and put the cursor back in the other window
+        autocmd VimEnter * NERDTree | wincmd p
 
 else
         let g:ale_sign_error = '>>'
