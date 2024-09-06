@@ -148,15 +148,21 @@ if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color'
         "Enable ryanoasis/vim-devicons
         let g:webdevicons_enable = 1
 
-        "Autostart Nerdtree
-        autocmd vimenter * NERDTree
+        " Start NERDTree when Vim is started without file arguments.
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+        " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+        autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+        \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+        " Exit Vim if NERDTree is the only window remaining in the only tab.
+        autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 || winnr('$') == 2 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 
         nnoremap <leader>n :NERDTreeFocus<CR>
         nnoremap <C-n> :NERDTree<CR>
         nnoremap <C-t> :NERDTreeToggle<CR>
         nnoremap <C-f> :NERDTreeFind<CR>
-        " start NerdTree and put the cursor back in the other window
-        autocmd VimEnter * NERDTree | wincmd p
 
 else
         let g:ale_sign_error = '>>'
