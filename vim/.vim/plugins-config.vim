@@ -105,7 +105,10 @@ if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color'
         let g:airline#extensions#tabline#formatter = 'unique_tail'
 
         "Set vim-airline theme
-        let g:airline_theme = 'dracula'
+        "let g:airline_theme = 'dracula'
+
+        "Set vim-airline theme
+        let g:airline_theme = 'catppuccin_frappe'
 
         "Enable vim-airline symbols
         if !exists('g:airline_symbols')
