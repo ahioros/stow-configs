@@ -51,7 +51,7 @@ return {
   },
   scrollback_lines = 5000,
   window_background_opacity = 0.98,
-  window_decorations = "TITLE|RESIZE", -- "RESIZE"
+  window_decorations = "NONE", -- "TITLE|RESIZE", -- "RESIZE"
   automatically_reload_config = true,
   -- WORKAROUND gnome wayland
   enable_wayland = true, -- false
