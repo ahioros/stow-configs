@@ -1,8 +1,13 @@
 format = """
+[░▒▓](#a3aed2)\
+[  ](bg:#a3aed2 fg:#090c0c)\
+[](bg:#769ff0 fg:#a3aed2)\
 $directory\
+[](fg:#769ff0 bg:#394260)\
+${custom.giturl}\
 $git_branch\
 $git_status\
-$fill\
+[](fg:#394260 bg:#212736)\
 $python\
 $pulumi\
 $golang\
@@ -25,21 +30,22 @@ ${custom.kubernetes}\
 ${custom.kubernetes_yml}\
 ${custom.shellfiles}\
 ${custom.ansible}\
-${custom.giturl}\
-${custom.live-clock-icon}\
-$memory_usage\
-$sudo\
 $terraform\
-$cmd_duration\
-$jobs\
-$battery\
-$time
-$status\
-$os\
 $container\
 $shell\
+$memory_usage\
+$sudo\
+$status\
+$battery\
+[](fg:#212736 bg:#1d2230)\
+${custom.live-clock-icon}\
+$time\
+$os\
 $localip\
-$character"""
+$cmd_duration\
+$jobs\
+[ ](fg:#1d2230)\
+\n$character"""
 
 # Add a new line before the prompt
 # $line_break\
@@ -48,7 +54,7 @@ $character"""
 add_newline = false
 
 # Use the color palette
-palette = "dracula"
+palette = "catppuccin_frappe"
 
 # Define Dracula color palette
 [palettes.dracula]
@@ -64,67 +70,104 @@ purple = "#bd93f9"
 red = "#ff5555"
 yellow = "#f1fa8c"
 
+[palettes.catppuccin_frappe]
+rosewater = "#f2d5cf"
+flamingo = "#eebebe"
+pink = "#f4b8e4"
+mauve = "#ca9ee6"
+red = "#e78284"
+maroon = "#ea999c"
+peach = "#ef9f76"
+yellow = "#e5c890"
+green = "#a6d189"
+teal = "#81c8be"
+sky = "#99d1db"
+sapphire = "#85c1dc"
+blue = "#8caaee"
+lavender = "#babbf1"
+text = "#c6d0f5"
+subtext1 = "#b5bfe2"
+subtext0 = "#a5adce"
+overlay2 = "#949cbb"
+overlay1 = "#838ba7"
+overlay0 = "#737994"
+surface2 = "#626880"
+surface1 = "#51576d"
+surface0 = "#414559"
+base = "#303446"
+mantle = "#292c3c"
+crust = "#232634"
+orange = "#ffb86c"
+
 [fill]
 symbol = "-"
 style = "bold #44475a"
 
 [python]
-style = 'teal'
-symbol = "🐍 "
-format = '[${symbol}${pyenv_prefix}("${version} )(\($virtualenv\) )]($style)'
+style ="bg:#212736"
+symbol = " 🐍 "
+format = '[[${symbol}${pyenv_prefix}("${version} )(\($virtualenv\) )](fg:#769ff0 bg:#212736)]($style)'
 pyenv_version_name = true
 pyenv_prefix = "venv "
 detect_extensions = ["py"]
 
 [aws]
-symbol = "  "
-style = "bold orange"
-format = '[$symbol($profile )(\[$duration\] )]($style)'
+symbol = "   "
+style = "bg:#212736"
+format = '[[$symbol($profile )(\[$duration\] )](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 
 [azure]
-symbol = "󰠅 "
-style = "bold blue"
-format = '[$symbol($subscription )]($style)'
+symbol = " 󰠅 "
+style = "bg:#212736"
+format = '[[$symbol($subscription )](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 
 [gcloud]
-symbol = '󱇶 '
-style = 'bold purple'
-format = 'on [$symbol$account(@$domain)(\($region\))]($style) '
+symbol = ' 󱇶 '
+style = "bg:#212736"
+format = '[[$symbol$account(@$domain)(\($region\))](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 
 [lua]
-symbol = ' '
-style = "bold purple"
+symbol = '  '
+style = "bg:#212736"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [nodejs]
-style = 'blue'
-symbol = ' '
+style = "bg:#212736"
+symbol = '  '
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
-style = 'blue'
-symbol = ' '
+style = "bg:#212736"
+symbol = '  '
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [haskell]
-style = 'blue'
-symbol = ' '
+style = "bg:#212736"
+symbol = '  '
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [rust]
-style = 'orange'
-symbol = ' '
+style = "bg:#212736"
+symbol = '  '
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [ruby]
-style = 'blue'
-symbol = ' '
+style = "bg:#212736"
+symbol = '  '
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [package]
-symbol = '󰏗 '
+symbol = ' 󰏗 '
+style = "bg:#212736"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [docker_context]
-symbol = " "
-format = "via [$symbol$context]($style) "
-style = 'blue bold'
+symbol = "  "
+format = '[[via $symbol$context](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 detect_folders = []
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
 detect_extensions = ['yml', 'yaml']
@@ -133,34 +176,34 @@ disabled = false
 
 [battery]
 full_symbol = "🔋"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂍 "
+charging_symbol = " 󰂄 "
+discharging_symbol = " 󰂍 "
 empty_symbol = "🪫"
-unknown_symbol = "󰂑 "
+unknown_symbol = " 󰂑 "
 disabled = false
-format = '[$symbol$percentage]($style) '
+format = '[[$symbol$percentage](fg:#769ff0 bg:#212736)]($style)'
 
 [[battery.display]]
-threshold = 10
+threshold = 90
 
-[character]
-error_symbol = "[󰣇](bold #ff5555)"
-success_symbol = "[󰣇](bold #f8f8f2)"
+#[character]
+#error_symbol = "[󰣇](bold #ff5555)"
+#success_symbol = "[󰣇](bold #f8f8f2)"
 
 [cmd_duration]
-style = "bold #f1fa8c"
+style = "bg:#1d2230"
 min_time = 500
-format = '[$duration]($style)'
+format = '[[$duration](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [jobs]
-symbol = ' '
-style = 'red'
+symbol = '   '
+style = "bg:#1d2230"
 number_threshold = 1
-format = '[$symbol]($style)'
+format = '[[$symbol$number](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [directory]
-read_only = " "
-style = "bold #50fa7b"
+read_only = "  "
+style = "fg:#e3e5e5 bg:#769ff0"
 format = "[$path ]($style)"
 truncation_length = 2
 truncation_symbol = "'…/"
@@ -177,42 +220,45 @@ truncate_to_repo = false
 'Games' ='󱎓 '
 'Virtual Machines' = '󰒋 '
 'Books' = ' '
+'Canal-Youtube' = ' '
 
 [git_branch]
 symbol = " "
-style = "bold #ff79c6"
+style = "bg:#394260"
+format =  '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
 [git_status]
-up_to_date = '✅'
-conflicted = '🏳'
-ahead = '⏩${count}'
-behind = '🐌${count}'
-untracked = '🤷'
-stashed = '📦'
-modified = '📝'
-renamed = '👅'
-deleted = '🗑'
-style = "bold #ff5555"
-format = '[$all_status$ahead_behind ]($style)'
+up_to_date = ' ✅ '
+conflicted = ' 🏳 '
+ahead = ' ⏩${count} '
+behind = ' 🐌${count} '
+untracked = '🤷 '
+stashed = ' 📦 '
+modified = ' 📝 '
+renamed = ' 👅 '
+deleted = ' 🗑 '
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
 [hostname]
-style = "bold purple"
+style = "white"
 
 [username]
 format = "[$user]($style) on "
 style_user = "bold #bd93f9"
 
 [memory_usage]
-format = 'via $symbol[$ram ]($style)'
+format = '[[via $symbol $ram](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 threshold = 75
-symbol = '  '
-style = 'bold dimmed green'
+symbol = '   '
+style =  "bg:#212736"
 
 [localip]
 ssh_only = true
-format = '@[$localipv4](bold red) '
+format = '@[[$localipv4](fg:#a0a9cb bg:#1d2230)]($style)'
 disabled = false
+style = "bg:#1d2230"
 
 #[os]
 #format = "on [($symbol )]($style)"
@@ -240,7 +286,8 @@ Unknown = " "
 
 [status]
 disabled = false
-format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+style =  "bg:#212736"
+format = '[\[$symbol$common_meaning$signal_name$maybe_int\](fg:#769ff0 bg:#212736)]($style)'
 symbol = '❌'
 not_executable_symbol = '🚫'
 not_found_symbol = '🔍'
@@ -250,42 +297,52 @@ recognize_signal_code = true
 map_symbol = true
 
 [pulumi]
-format = '[🛥 ($version )$stack]($style) '
+format = '[[🛥($version)$stack](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
+style = "bg:#212736"
 
 [c]
-symbol = " "
-style = "bold green"
+symbol = "  "
+style = "bg:#212736"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [perl]
-symbol = " "
-style = "bold green"
+symbol = "  "
+style = "bg:#212736"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 
 [dotnet]
-symbol = "󰪮 "
+style = "bg:#212736"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
+symbol = " 󰪮  "
 detect_extensions = ["csproj", "fsproj", "xproj"]
 detect_files = ['global.json', 'project.json', 'Directory.Build.props', 'Directory.Build.targets', 'Packages.props']
 disabled = false
 
 [container]
-symbol = '⬢'
+style = "bg:#212736"
+symbol = ' ⬢ '
 disabled = false
-format = '[$symbol \[$name\]]($style) '
+format = '[[$symbol \[$name\]](fg:#769ff0 bg:#212736)]($style)'
 
 [terraform]
-symbol = "󱁢 "
+style = "bg:#212736"
+symbol = " 󱁢 "
+format = '[[via $symbol$workspace](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 
 [helm]
-format = 'via [⎈ $version](bold white) '
+style = "bg:#212736"
+symbol = " ⎈ "
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 
 [custom.dockerfiles]
 description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.yml files"
-symbol = " "
+symbol = "  "
 files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
-format = " via [$symbol]($style)"
-style = "bold blue"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 
 [custom.kubernetes]
 description = "Shows the kubernetes symbol if the current directory has a k8s files"
@@ -293,8 +350,8 @@ detect_folders = ["k8s", "manifests"]
 command = "kubernetes-files"
 when =""" ls *.yaml """
 shell = ["bash", "--noprofile", "--norc"]
-format = " via [$output]($style) "
-style = "bold blue"
+format = '[[via $output ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 
 [custom.kubernetes_yml]
 description = "Shows the kubernetes symbol if the current directory has a k8s files"
@@ -302,33 +359,34 @@ detect_folders = ["k8s", "manifests"]
 command = "kubernetes-files"
 when =""" ls *.yml """
 shell = ["bash", "--noprofile", "--norc"]
-format = " via [$output]($style) "
-style = "bold blue"
+format = '[[via $output ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 
 [custom.shellfiles]
 description = "Shows the shell symbol if the current directory has shell files"
-symbol = "󱆃 "
+symbol = " 󱆃 "
 when = """ test -e *.sh """
 shell = "/bin/bash"
-format = " via [$symbol]($style)"
-style = "bold blue"
+#format = " via [$symbol]($style)"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 
 [custom.ansible]
 description = "Shows the ansible symbol if the current directory has ansible files"
-symbol = "󱂚 "
+symbol = " 󱂚 "
 when = """ test -n "${ANSIBLE_HOME}" """
 files = ["ansible.cfg"]
 shell = "/bin/bash"
-format = " via [$symbol]($style)"
-style = "bold blue"
+format = '[[via $symbol](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#212736"
 
 [custom.giturl]
 description = "Display symbol for remote Git server"
 command = "check-git-remote"
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 shell = ["bash", "--noprofile", "--norc"]
-format = "at $output  "
-style = "bold blue"
+format = "[[(at $output )](fg:#769ff0 bg:#394260)]($style)"
+style = "bg:#394260"
 
 [time]
 disabled = true
@@ -337,10 +395,11 @@ style = "bold blue"
 format = '[$time]($style)'
 
 [custom.live-clock-icon]
-command = ' h="";echo  ${h:$(date +%H)%12:1}'
+# workaround for linux, start with 12 o'clock icon instead of 1 o'clock
+command =' h="";echo  ${h:$(date +%H)%12:1}'
 description = "Live updating clock icon, changes hourly. Icons can be customized to your liking."
 when = true
-style = "bold blue"
+style = "bg:#1d2230"
 format = "[$output ]($style)"
 
 #Resource:
