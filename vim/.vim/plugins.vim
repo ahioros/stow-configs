@@ -18,4 +18,6 @@ call plug#begin()
   Plug 'lilydjwg/colorizer'
   Plug 'ryanoasis/vim-devicons'
   Plug 'preservim/nerdtree'
+  "Theme
+  Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
 call plug#end()
