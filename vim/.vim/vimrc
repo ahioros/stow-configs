@@ -95,7 +95,13 @@ so ~/.vim/plugins.vim
 so ~/.vim/plugins-config.vim
 
 " Set the dracula theme after plugins have been loaded
-colorscheme dracula
+"colorscheme dracula
+
+"catppuccin theme
+colorscheme catppuccin_frappe
+
+"dep for catppuccin
+set termguicolors
 
 "custom for each format python, sh, terraform
 if has("autocmd")
