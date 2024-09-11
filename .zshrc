@@ -13,11 +13,24 @@ export ZSH="$HOME/.oh-my-zsh"
 
 if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]]; then
 
+  # set THEME
+  # Edit ~/.tmux.conf,
+  # vim (plugins,plugins-config, vimrc),
+  # ~/.config/starship/starship.toml
+  # replace the tty theme
+  THEME="catppuccin_frappe"
+
+  case $THEME in
+    'dracula')
+      source $HOME/.zsh/dracula-theme.sh
+    ;;
+    'catppuccin_frappe')
+      source $HOME/.zsh/catppuccin_frappe-theme.sh
+    ;;
+  esac
+
   #Enable tmux plugin
   ZSH_TMUX_AUTOSTART=true
-
-  # Enable dracula theme
-  ZSH_THEME="dracula"
 
   # Enable fzf-tab plugin (install fzf-tab plugin)
   source $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
@@ -43,15 +56,19 @@ if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]]; then
   zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
   # Dracula theme for FZF
-  export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --preview-label="[ Preview ]" --prompt="▶ " --marker="♡ "  --pointer="󰋇" --info="right" '
+  #export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --preview-label="[ Preview ]" --prompt="▶ " --marker="♡ "  --pointer="󰋇" --info="right" '
 
 else
 
+  # Enable theme for tty
   ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
 
   #Default command to use when inputs tty
   export FZF_DEFAULT_COMMAND='fd --type f'
 
+  export PAGER="less"
+  alias less=$PAGER
+  alias zless=$PAGER
 fi
 
 # Set list of themes to pick from when loading at random
@@ -160,9 +177,6 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 zle -N autosuggest-accept
 bindkey '^ ' autosuggest-accept
 
-#Enable zsh syntax highlighting with dracula theme
-source $HOME/.oh-my-zsh/dracula/zsh-syntax-highlighting.sh
-
 #Enable zsh syntax highlight
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -193,7 +207,6 @@ alias top='btop'
 alias dmesg='sudo dmesg'
 #alias cat='ccat'
 #alias ls='ls --color=auto'
-alias cat='/bin/bat --paging=never --theme=Dracula'
 alias catn='/bin/cat'
 alias catnl='/bin/bat --paging=never'
 alias ll='lsd -lh --group-dirs=first'
@@ -210,10 +223,6 @@ alias steam='flatpak run com.valvesoftware.Steam'
 alias vi='vim'
 alias localstack-start='docker run -d --rm -it -p 4566:4566  -p 4510-4559:4510-4559 localstack/localstack'
 alias ntop='nload'
-
-export PAGER="bat --theme=Dracula"
-alias less=$PAGER
-alias zless=$PAGER
 
 #Color for less
 export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
@@ -237,16 +246,10 @@ bindkey '^n' history-search-forward
 # enable grc (install grc package) color ouput for some commands
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
-#Dracula theme for tty
-source $HOME/.oh-my-zsh/dracula/dracula-tty.sh
-
 #Change the alias if we are running since a tty
 if [[ $(tty) = /dev/tty[0-9]* ]] || [[ $TERM == "screen" ]]  ; then
   unalias ls
   alias ls='ls --color=auto'
-
-  # Disable autostart
-  ZSH_TMUX_AUTOSTART=false
 
   if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then
     sudo loadkeys us
@@ -293,5 +296,5 @@ if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]] &&  [
 fi
 
 #fortune cookie with cowsay
-fortune | cowsay
+fortune | cowsay -f /usr/share/cowsay/cows/tux.cow
 # vim: set ft=sh ts=2 sw=2 et:
