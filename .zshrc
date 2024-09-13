@@ -11,64 +11,75 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="duellj"
 
-if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]]; then
+if [[ "$TERM" == "xterm-256color" ]] || \
+    [[ "$TERM" == "screen-256color" ]]; then
 
-  # set THEME
-  # Edit ~/.tmux.conf,
-  # vim (plugins,plugins-config, vimrc),
-  # ~/.config/starship/starship.toml
-  # replace the tty theme
-  THEME="catppuccin_frappe"
+    # set THEME
+    # Edit ~/.tmux.conf,
+    # Edit ~/.gitconfig,
+    # Edit ~/.config/bat/bat.conf,
+    # vim (plugins,plugins-config, vimrc),
+    # ~/.config/starship/starship.toml
+    THEME="catppuccin_frappe"
 
-  case $THEME in
-    'dracula')
-      source $HOME/.zsh/dracula-theme.sh
-    ;;
-    'catppuccin_frappe')
-      source $HOME/.zsh/catppuccin_frappe-theme.sh
-    ;;
-  esac
+    case $THEME in
+        'dracula')
+            source $HOME/.zsh/dracula-theme.sh
+        ;;
+        'catppuccin_frappe')
+            source $HOME/.zsh/catppuccin_frappe-theme.sh
+        ;;
+    esac
 
-  #Enable tmux plugin
-  ZSH_TMUX_AUTOSTART=true
+    #Enable tmux plugin
+    ZSH_TMUX_AUTOSTART=true
 
-  # Enable fzf-tab plugin (install fzf-tab plugin)
-  source $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
+    # Enable zellij
+    #if [[ -z "$ZELLIJ" ]]; then
+    #  if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+    #    zellij attach -c
+    #  else
+    #    zellij
+    #  fi
 
-  # Enable fzf-tab-source plugin (install fzf-tab-source plugin)
-  source $HOME/.oh-my-zsh/custom/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
+    #  if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+    #    exit
+    #  fi
+    #fi
 
-  # enable fzf menu for completion
-  # Replace zsh's default completion selection menu with fzf
-  zstyle ':completion:*' menu no
+    # Enable fzf-tab plugin (install fzf-tab plugin)
+    source $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
-  # enable fzf-tab preview (install fzf-tab plugin)
-  enable-fzf-tab
-  zstyle ":fzf-tab:complete:cd:*" fzf-preview '/usr/bin/lsd --group-dirs=first $realpath'
+    # Enable fzf-tab-source plugin (install fzf-tab-source plugin)
+    source $HOME/.oh-my-zsh/custom/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh
 
-  # disable sort when completing `git checkout`
-  zstyle ':completion:*:git-checkout:*' sort false
+    # enable fzf menu for completion
+    # Replace zsh's default completion selection menu with fzf
+    zstyle ':completion:*' menu no
 
-  # NOTE: don't use escape sequences here, fzf-tab will ignore them
-  zstyle ':completion:*:descriptions' format '[%d]'
+    # enable fzf-tab preview (install fzf-tab plugin)
+    enable-fzf-tab
+    zstyle ":fzf-tab:complete:cd:*" fzf-preview '/usr/bin/lsd --group-dirs=first $realpath'
 
-  # fzf colors
-  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+    # disable sort when completing `git checkout`
+    zstyle ':completion:*:git-checkout:*' sort false
 
-  # Dracula theme for FZF
-  #export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4 --preview-window=40% --height=90% --layout=reverse --border="rounded" --preview-window="border-rounded" --preview-label="[ Preview ]" --prompt="▶ " --marker="♡ "  --pointer="󰋇" --info="right" '
+    # NOTE: don't use escape sequences here, fzf-tab will ignore them
+    zstyle ':completion:*:descriptions' format '[%d]'
+
+    # fzf colors
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 else
+    # Enable theme for tty
+    ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
 
-  # Enable theme for tty
-  ZSH_THEME="dst" #gentoo #jtriley #mikeh #rkj-repos ## #"daveverwer" "dieter"
+    #Default command to use when inputs tty
+    export FZF_DEFAULT_COMMAND='fd --type f'
 
-  #Default command to use when inputs tty
-  export FZF_DEFAULT_COMMAND='fd --type f'
-
-  export PAGER="less"
-  alias less=$PAGER
-  alias zless=$PAGER
+    export PAGER="less"
+    alias less=$PAGER
+    alias zless=$PAGER
 fi
 
 # Set list of themes to pick from when loading at random
@@ -235,7 +246,8 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
 setopt appendhistory autocd extendedglob nomatch notify
-setopt sharehistory hist_ignore_space hist_save_no_dups hist_ignore_dups hist_find_no_dups
+setopt sharehistory hist_ignore_space hist_save_no_dups
+setopt hist_ignore_dups hist_find_no_dups
 unsetopt beep
 
 # key bindings
@@ -247,15 +259,16 @@ bindkey '^n' history-search-forward
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
 #Change the alias if we are running since a tty
-if [[ $(tty) = /dev/tty[0-9]* ]] || [[ $TERM == "screen" ]]  ; then
-  unalias ls
-  alias ls='ls --color=auto'
+if [[ $(tty) = /dev/tty[0-9]* ]] || [[ $TERM == "screen" ]]; then
+    unalias ls
+    alias ls='ls --color=auto'
 
-  if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ]; then
-    sudo loadkeys us
-  else
-    sudo loadkeys la-latin1
-  fi
+    # for nuphy air 75 keyboard
+    if [ $(lsusb | grep "Apple, Inc. Aluminium Keyboard" | wc -l) -gt 0 ];then
+        sudo loadkeys us
+    else
+        sudo loadkeys la-latin1
+    fi
 fi
 
 #For docker
@@ -282,19 +295,22 @@ export GROFF_NO_SGR=1                   # for konsole
 cores=$(nproc)
 load=$(awk '{print $3}'< /proc/loadavg)
 
-usage=$(echo | awk -v c="${cores}" -v l="${load}" '{print l*100/c}' | awk -F. '{print $1}')
+usage=$(echo | awk -v c="${cores}" -v l="${load}" '{print l*100/c}' | \
+    awk -F. '{print $1}')
+
 if [[ ${usage} -lt 60 ]]; then
     if [ -f /usr/bin/screenfetch ]; then
-      screenfetch  -d '-de;-wm;-wmtheme' -D 'Arch Linux' -A 'Arch Linux' ;
+        screenfetch  -d '-de;-wm;-wmtheme' -D 'Arch Linux' -A 'Arch Linux';
     fi
 fi
 
 # starship
-if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]] &&  [[ -n "$TMUX" ]]; then
-  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-  eval "$(starship init zsh)"
+if [[ "$TERM" == "xterm-256color" ]] || [[ "$TERM" == "screen-256color" ]] \
+    &&  [[ -n "$TMUX" ]] || [[ -n "$ZELLIJ" ]]; then
+    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+    eval "$(starship init zsh)"
 fi
 
 #fortune cookie with cowsay
 fortune | cowsay -f /usr/share/cowsay/cows/tux.cow
-# vim: set ft=sh ts=2 sw=2 et:
+# vim: set ft=sh ts=4 sw=4 et :
