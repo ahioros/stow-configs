@@ -19,5 +19,6 @@ call plug#begin()
   Plug 'ryanoasis/vim-devicons'
   Plug 'preservim/nerdtree'
   "Theme
-  Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
+  Plug 'catppuccin/vim', {'as': 'catppuccin'}
+  Plug 'cespare/vim-toml', {'branch':'main'}
 call plug#end()
