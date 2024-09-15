@@ -45,12 +45,12 @@ endif
 let g:ale_linters = {
 \   'python': ['mypy', 'pylint', 'flake8', 'ruff'],
 \   'yaml':   ['yamllint'],
-\   'yml':    ['yamllint'],
 \   'tf':     ['tflint', 'tfsec'],
 \   'vim':    ['vint'],
 \   'sh':     ['bashate', 'shellcheck'],
 \   'markdown': ['mdl'],
 \   'xml':    ['xmllint'],
+\   'go': ['gofmt'],
 \}
 
 "markdown mdl configuration
@@ -68,7 +68,12 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black', 'isort'],
 \   'markdown': ['prettier'],
+\   'json': ['prettier'],
+\   'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines' ],
+\   'javascript': ['prettier'],
+\   'go':['gofmt'],
 \}
+
 "Optional: Configure ale to use isort with parameters
 let g:ale_python_isort_options = '--profile black -l 100'
 
