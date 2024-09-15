@@ -45,12 +45,17 @@ endif
 let g:ale_linters = {
 \   'python': ['mypy', 'pylint', 'flake8', 'ruff'],
 \   'yaml':   ['yamllint'],
+\   'yml':    ['yamllint'],
 \   'tf':     ['tflint', 'tfsec'],
 \   'vim':    ['vint'],
 \   'sh':     ['bashate', 'shellcheck'],
-\   'md':     ['markdownlint'],
+\   'markdown': ['mdl'],
 \   'xml':    ['xmllint'],
 \}
+
+"markdown mdl configuration
+" file ~/.mdlrc
+" file ~/.config/mdl/markdownlint.rb
 
 "Optional: Configure ale to use flake8 with parameters
 let g:ale_python_flake8_options = '--max-line-length 100'
@@ -62,6 +67,7 @@ let g:ale_python_pylint_options = '--disable=missing-docstring,too-few-public-me
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black', 'isort'],
+\   'markdown': ['prettier'],
 \}
 "Optional: Configure ale to use isort with parameters
 let g:ale_python_isort_options = '--profile black -l 100'
