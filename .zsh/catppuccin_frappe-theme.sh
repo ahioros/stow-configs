@@ -22,6 +22,7 @@ alias cat='/bin/bat --paging=never --theme="Catppuccin Frappe"'
 export PAGER='bat --theme="Catppuccin Frappe"'
 alias less=$PAGER
 alias zless=$PAGER
+alias glow="glow -s $HOME/.config/glow/catppuccin_frappe.json -w 80"
 
 #Catppuccin theme for tty
 source $HOME/.oh-my-zsh/catppuccin/catppuccin_frappe-tty.sh
