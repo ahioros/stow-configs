@@ -18,7 +18,8 @@ end)
 
 return {
   -- color_scheme: 'Dracula (Official)',local config = {}
-  color_scheme = "Dracula",
+  -- color_scheme = "Dracula",
+  color_scheme = "Catppuccin Frappe",
   font = wezterm.font('Hack Nerd Font'),
   font_size = 16.0,
   font_rules = {
