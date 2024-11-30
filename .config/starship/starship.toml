@@ -349,6 +349,7 @@ description = "Shows the kubernetes symbol if the current directory has a k8s fi
 detect_folders = ["k8s", "manifests"]
 command = "kubernetes-files"
 when =""" ls *.yaml """
+ignore_timeout = true
 shell = ["bash", "--noprofile", "--norc"]
 format = '[[via $output ](fg:#769ff0 bg:#212736)]($style)'
 style = "bg:#212736"
