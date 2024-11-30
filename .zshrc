@@ -209,6 +209,7 @@ alias yssa='yay -Ss --aur'
 alias yrn='yay -Rnd '
 alias yql='yay -Ql '
 alias pqtdq='sudo pacman -Rns $(pacman -Qtdq)' #orphan packages
+alias pacsize='pacman -Qi | awk '"'"'/^Name/{name=$3} /^Installed Size/{print $4$5, name}'"'"' | sort -h'
 alias poweroffhd='udisksctl power-off -b /dev/'
 alias ysc='sudo yay -Sc'
 alias yscc='sudo yay -Scc'
