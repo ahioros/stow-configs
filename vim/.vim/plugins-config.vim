@@ -51,6 +51,8 @@ let g:ale_linters = {
 \   'markdown': ['mdl'],
 \   'xml':    ['xmllint'],
 \   'go': ['gofmt'],
+\   'css': ['stylelint'],
+\   'javascript': ['oxlint'],
 \}
 
 "markdown mdl configuration
