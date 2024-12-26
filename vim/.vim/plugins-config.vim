@@ -35,7 +35,34 @@ endif
 
 "Plugin codeium
 "Uncomment to disable codeium plugin
-"let g:codeium_enabled = v:false
+let g:codeium_enabled = v:false
+
+"Plugin copilot
+"Uncomment to disable copilot plugin
+"let g:copilot_enabled = v:false
+let g:copilot_filetypes = {
+\   'python': v:true,
+\   'yaml':   v:true,
+\   'tf':     v:true,
+\   'vim':    v:true,
+\   'sh':     v:true,
+\   'markdown': v:true,
+\   'xml':    v:true,
+\   'go': v:true,
+\   'css': v:true,
+\   'javascript': v:true,
+\   'json': v:true,
+\   'perl': v:true,
+\   'gitcommit': v:true
+\ }
+
+"Disable copilot for extremely large files
+"http://curtispoe.org/articles/using-github-copilot-with-vim.html
+autocmd BufReadPre *
+      \ let f=getfsize(expand("<afile>"))
+      \ | if f > 100000 || f == -2
+      \ | let b:copilot_enabled = v:false
+      \ | endif
 
 "Plugin ale
 "Uncomment to disable ale plugin - https://github.com/dense-analysis/ale
